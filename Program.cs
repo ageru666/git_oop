@@ -7,7 +7,7 @@
         {
             Menu();
         }
-
+        
         static void Menu()
         {
             Console.WriteLine("Choose one of the options below.");
