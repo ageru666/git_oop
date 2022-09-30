@@ -1,4 +1,4 @@
-﻿namespace Lab1_Voloshyn
+﻿namespace Lab1_Voloshin
 {
 
     static class MainMenu
@@ -7,20 +7,20 @@
         {
             Menu();
         }
-        
+
         static void Menu()
         {
             Console.WriteLine("Choose one of the options below.");
             Console.WriteLine("1. Geometry");
             Console.WriteLine("2. Sorting");
             string input = Console.ReadLine();
-            switch (input) 
+            switch (input) // 8 stars total
             {
                 case "1":
-                    //Geometry.AnyAngleInput(); 
+                    Geometry.AnyAngleInput(); //**
                     break;
                 case "2":
-                    //Sorting.SortingMenu(); 
+                    SortManager.SortMenuSwitcher(); // ******
                     break;
                 default:
                     Console.Clear();
