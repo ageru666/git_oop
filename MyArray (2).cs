@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 
-namespace Lab1_Voloshin
+namespace Lab1_Voloshin.Sorting
 {
     internal struct MyArray<T> : IEnumerable<T>, IEnumerator<T> //interfaces for loops
     {
@@ -71,7 +71,7 @@ namespace Lab1_Voloshin
         public bool MoveNext()
         {
             position++;
-            return (position < array.Length);
+            return position < array.Length;
         }
 
         public void Reset() => position = -1;
@@ -82,7 +82,7 @@ namespace Lab1_Voloshin
 
         #region Sorting
 
-        
+
 
 
         public void CombSort()
@@ -135,10 +135,10 @@ namespace Lab1_Voloshin
         }
 
 
-       
 
 
-        
+
+
         #endregion
     }
 }
