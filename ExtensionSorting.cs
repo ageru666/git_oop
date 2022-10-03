@@ -7,9 +7,9 @@ namespace Lab1_Voloshin.Sorting
         static bool isRecursion = false;
         static bool CheckForCorrectClass(dynamic myClass)
         {
-            if (myClass.GetType().Name == typeof(MyArray<>).Name ||
-                myClass.GetType().Name == typeof(MyList<>).Name ||
-                myClass.GetType().Name == typeof(MyLinkedList<>).Name) return true;
+            if (myClass.GetType().Name == typeof(NewArray<>).Name ||
+                myClass.GetType().Name == typeof(NewList<>).Name ||
+                myClass.GetType().Name == typeof(NewLinkedList<>).Name) return true;
 
             Console.WriteLine("This methods made only for my custom generic classes");
             return false;
@@ -68,7 +68,13 @@ namespace Lab1_Voloshin.Sorting
             }
         }
 
-        public static void QuickSortGeneric<T>(this T myClass, int lastIndex, int startInd = 0)
+        public static void QuickSortGeneric<T>(this T myClass)
+        {
+            dynamic dynamicT = myClass;
+            QuickSort<T>(myClass, dynamicT.Count - 1);
+        }
+
+        public static void QuickSort<T>(T myClass, int lastIndex, int startInd = 0)
         {
             isRecursion = true;
             if (CheckForCorrectClass(myClass) == false && isRecursion == false) return;
@@ -96,9 +102,9 @@ namespace Lab1_Voloshin.Sorting
             }
 
             if (startInd < j)
-                QuickSortGeneric(myClass, j, startInd);
+                QuickSort(myClass, j, startInd);
             if (i < lastIndex)
-                QuickSortGeneric(myClass, lastIndex, i);
+                QuickSort(myClass, lastIndex, i);
             isRecursion = false;
         }
 
@@ -128,10 +134,16 @@ namespace Lab1_Voloshin.Sorting
 
         public static void MergeSortGeneric<T>(this T myClass)
         {
-            isRecursion = true;
-            if (CheckForCorrectClass(myClass) == false && isRecursion == false) return;
             dynamic dynamicT = myClass;
+            if ("MyLinkedList`1" == dynamicT.GetType().Name)
+            {
+                dynamicT.MergeSort();
+                return;
+            }
+
+            isRecursion = true;
             dynamic arr = dynamicT.Array;
+            if (CheckForCorrectClass(myClass) == false && isRecursion == false) return;
 
             MergeSortRecursion(0, dynamicT.Array.Length - 1, arr);
 
