@@ -2,7 +2,7 @@
 
 namespace Lab1_Voloshin.Sorting
 {
-    internal struct MyArray<T> : IEnumerable<T>, IEnumerator<T> //interfaces for loops
+    internal struct NewArray<T> : IEnumerable<T>, IEnumerator<T> //interfaces for loops
     {
         int count = 0;
         public int Count { get => count; } // array size
@@ -10,7 +10,7 @@ namespace Lab1_Voloshin.Sorting
         public T[] Array { get => array; } // array size
 
 
-        public MyArray(int size = 1)
+        public NewArray(int size = 1)
         {
             array = new T[size];
             count = array.Length;

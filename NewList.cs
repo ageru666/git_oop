@@ -1,14 +1,14 @@
 ﻿using System.Collections;
 
-namespace Lab1_Voloshin
+namespace Lab1_Voloshin.Sorting
 {
-    public class MyList<T> : IEnumerable<T>, IEnumerator<T> // interfaces for acessing loops
+    public class NewList<T> : IEnumerable<T>, IEnumerator<T> 
     {
         int count = 0; 
-        public int Count { get => count; } // array size
+        public int Count { get => count; } 
 
-        T[] array = new T[1]; //list based on generic array
-        public T[] Array { get => array; } // array size
+        T[] array = new T[1]; 
+        public T[] Array { get => array; } 
         int index = -1; 
 
         public void Clear() 
@@ -57,21 +57,22 @@ namespace Lab1_Voloshin
             index++; 
             this.array[index] = mass; 
         }
-        public T this[int index]  //indexator, list[]
+        public T this[int index]  
         {
             get { return array[index]; }
             set { array[index] = value; }
         }
 
+      
         #region interface implemetation
         int position = -1;
-        public bool MoveNext() 
+        public bool MoveNext()
         {
             position++;
-            return (position < array.Length);
+            return position < array.Length;
         }
 
-        public void Reset() => position = -1; 
+        public void Reset() => position = -1;
 
         public T Current
         {
@@ -81,8 +82,7 @@ namespace Lab1_Voloshin
         object IEnumerator.Current => Current;
         public IEnumerator GetEnumerator() => array.GetEnumerator();
         IEnumerator<T> IEnumerable<T>.GetEnumerator() => ((IEnumerable<T>)array).GetEnumerator();
-        public void Dispose() => this.Dispose();
+        public void Dispose() => Dispose();
         #endregion
-
     }
 }

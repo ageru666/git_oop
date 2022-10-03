@@ -1,4 +1,6 @@
-﻿namespace Lab1_Voloshin
+﻿using Lab1_Voloshin.Geometry;
+
+namespace Lab1_Voloshin
 {
 
     static class MainMenu
@@ -17,7 +19,7 @@
             switch (input) // 8 stars total
             {
                 case "1":
-                    Geometry.AnyAngleInput(); //**
+                    GeometryBase.AnyAngleInput(); //**
                     break;
                 case "2":
                     SortManager.SortMenuSwitcher(); // ******

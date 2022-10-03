@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 // https://codereview.stackexchange.com/questions/138142/linked-list-in-c
 // used that implementation of LinkedList as base, because of the lack of time
-namespace Lab1_Voloshin
+namespace Lab1_Voloshin.Sorting
 {
     public class Node<T>
     {
@@ -9,17 +9,17 @@ namespace Lab1_Voloshin
         public Node<T> next;
     }
 
-    internal class MyLinkedList<T> : IEnumerable<T>, IEnumerable
+    internal class NewLinkedList<T> : IEnumerable<T>, IEnumerable
     {
         private Node<T> headNode;
         private int count;
         public int Count { get { { return count; } } }
-        public MyLinkedList()
+        public NewLinkedList()
         {
             headNode = null;
             count = 0;
         }
-        public MyLinkedList(IEnumerable<T> Items)
+        public NewLinkedList(IEnumerable<T> Items)
         {
             foreach (T item in Items)
                 AddHead(item);
