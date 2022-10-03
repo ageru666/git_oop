@@ -1,5 +1,5 @@
-﻿using Lab1_Voloshin;
-using Lab1_Voloshin.Sorting;
+﻿using Lab1_Voloshin.Sorting;
+using System.Collections;
 
 static class SortManager
 {
@@ -49,7 +49,7 @@ static class SortManager
             return;
         }
 
-        dynamic arr;
+        IEnumerable arr;
         Type type;
         ChooseTypeForArray(out type, out arr, ref size);
 
@@ -58,7 +58,7 @@ static class SortManager
         Console.WriteLine($"Created custom array of type [{type.Name}] with size of [{size}]");
 
 
-        Console.WriteLine($"Please, enter numbers to fill the array.");
+        Console.WriteLine($"Enter numbers");
         if (!FillArray(arr, type, ref size))
             return;
 
@@ -67,28 +67,27 @@ static class SortManager
         foreach (var item in arr)
             Console.Write(" " + item);
 
-        SortedCollectionOutput(ref arr);
+        SortedCollectionOutput(arr);
     }
     static void ListsSorting()
     {
-        dynamic list;
+        IEnumerable list;
         Type type;
         ChooseTypeForList(out type, out list);
-
 
         Console.Clear();
         Console.WriteLine($"Created custom list of type [{type.Name}]");
 
 
-        Console.WriteLine($"Please, enter numbers to fill the list.");
+        Console.WriteLine($"Enter numbers.");
         if (!FillList(list, type))
             return;
 
-        SortedCollectionOutput(ref list);
+        SortedCollectionOutput(list);
     }
     static void LinkedListsSorting()
     {
-        dynamic list;
+        IEnumerable list;
         Type type;
         ChooseTypeForLinkedList(out type, out list);
 
@@ -97,19 +96,19 @@ static class SortManager
         Console.WriteLine($"Created custom LinkedList of type [{type.Name}]");
 
 
-        Console.WriteLine($"Please, enter numbers to fill the LinkedList.");
+        Console.WriteLine($"Enter numbers.");
         if (!FillLinkedList(list, type))
             return;
 
-        SortedCollectionOutput(ref list);
+        SortedCollectionOutput(list);
     }
 
     static bool FillArray(dynamic collection, Type type, ref int size)
     {
         bool isWhiteSpaceSeparator = false;
-        if (type.Name == "Double" || type.Name == "Single")
+        if ( type.Name != "Single")
             isWhiteSpaceSeparator = true;
-        
+
         string format = isWhiteSpaceSeparator ? "WHITESPACE separator, example [23,4 -23,431 0,13f]" : "',' or whitespace or ';' separators";
         Console.WriteLine($"Input values of which array contains using {format}:");
         string inputValues = Console.ReadLine();
@@ -201,7 +200,7 @@ static class SortManager
     static bool FillList(dynamic collection, Type type)
     {
         bool isWhiteSpaceSeparator = false;
-        if (type.Name == "Double" || type.Name == "Single")
+        if (type.Name == "Single")
             isWhiteSpaceSeparator = true;
 
         string format = isWhiteSpaceSeparator ? "WHITESPACE separator, example [23,4 -23,431 0,13f]" : "',' or whitespace or ';' separators";
@@ -295,7 +294,7 @@ static class SortManager
     static bool FillLinkedList(dynamic collection, Type type)
     {
         bool isWhiteSpaceSeparator = false;
-        if (type.Name == "Double" || type.Name == "Single")
+        if ( type.Name == "Single")
             isWhiteSpaceSeparator = true;
 
         string format = isWhiteSpaceSeparator ? "WHITESPACE separator, example [23,4 -23,431 0,13f]" : "',' or whitespace or ';' separators";
@@ -388,7 +387,7 @@ static class SortManager
         return true;
     }
 
-    static void ChooseTypeForArray(out Type type, out dynamic collection, ref int size)
+    static void ChooseTypeForArray(out Type type, out IEnumerable collection, ref int size)
     {
         Console.WriteLine("Choose type for Array");
         Console.WriteLine("1.int");
@@ -400,27 +399,27 @@ static class SortManager
         switch (Console.ReadLine())
         {
             case "1":
-                collection = new MyArray<int>(size);
+                collection = new NewArray<int>(size);
                 type = typeof(int);
                 break;
             case "2":
-                collection = new MyArray<double>(size);
+                collection = new NewArray<double>(size);
                 type = typeof(double);
                 break;
             case "3":
-                collection = new MyArray<float>(size);
+                collection = new NewArray<float>(size);
                 type = typeof(float);
                 break;
             case "4":
-                collection = new MyArray<short>(size);
+                collection = new NewArray<short>(size);
                 type = typeof(short);
                 break;
             case "5":
-                collection = new MyArray<ushort>(size);
+                collection = new NewArray<ushort>(size);
                 type = typeof(ushort);
                 break;
             case "6":
-                collection = new MyArray<uint>(size);
+                collection = new NewArray<uint>(size);
                 type = typeof(uint);
                 break;
             default:
@@ -430,7 +429,7 @@ static class SortManager
                 break;
         }
     }
-    static void ChooseTypeForList(out Type type, out dynamic collection)
+    static void ChooseTypeForList(out Type type, out IEnumerable list)
     {
         Console.WriteLine("Choose type for List");
         Console.WriteLine("1.int");
@@ -442,37 +441,37 @@ static class SortManager
         switch (Console.ReadLine())
         {
             case "1":
-                collection = new MyList<int>();
+                list = new NewList<int>();
                 type = typeof(int);
                 break;
             case "2":
-                collection = new MyList<double>();
+                list = new NewList<double>();
                 type = typeof(double);
                 break;
             case "3":
-                collection = new MyList<float>();
+                list = new NewList<float>();
                 type = typeof(float);
                 break;
             case "4":
-                collection = new MyList<short>();
+                list = new NewList<short>();
                 type = typeof(short);
                 break;
             case "5":
-                collection = new MyList<ushort>();
+                list = new NewList<ushort>();
                 type = typeof(ushort);
                 break;
             case "6":
-                collection = new MyList<uint>();
+                list = new NewList<uint>();
                 type = typeof(uint);
                 break;
             default:
                 Console.WriteLine("Incorrect input.");
                 type = null;
-                collection = null;
+                list = null;
                 break;
         }
     }
-    static void ChooseTypeForLinkedList(out Type type, out dynamic collection)
+    static void ChooseTypeForLinkedList(out Type type, out IEnumerable collection)
     {
         Console.WriteLine("Choose type for LinkedList");
         Console.WriteLine("1.int");
@@ -484,27 +483,27 @@ static class SortManager
         switch (Console.ReadLine())
         {
             case "1":
-                collection = new MyLinkedList<int>();
+                collection = new NewLinkedList<int>();
                 type = typeof(int);
                 break;
             case "2":
-                collection = new MyLinkedList<double>();
+                collection = new NewLinkedList<double>();
                 type = typeof(double);
                 break;
             case "3":
-                collection = new MyLinkedList<float>();
+                collection = new NewLinkedList<float>();
                 type = typeof(float);
                 break;
             case "4":
-                collection = new MyLinkedList<short>();
+                collection = new NewLinkedList<short>();
                 type = typeof(short);
                 break;
             case "5":
-                collection = new MyLinkedList<ushort>();
+                collection = new NewLinkedList<ushort>();
                 type = typeof(ushort);
                 break;
             case "6":
-                collection = new MyLinkedList<uint>();
+                collection = new NewLinkedList<uint>();
                 type = typeof(uint);
                 break;
             default:
@@ -515,7 +514,7 @@ static class SortManager
         }
     }
 
-    static void SortedCollectionOutput(ref dynamic collection)
+    static void SortedCollectionOutput(IEnumerable collection)
     {
         Console.WriteLine("Collection filled up!");
         Console.WriteLine("We are almost done!\n");
@@ -529,56 +528,56 @@ static class SortManager
         Console.WriteLine("7.Bucket sort");
 
         string input = Console.ReadLine();
-        if ("MyLinkedList`1" == collection.GetType().Name) // because of only one sort with linkelist implemented yet
+        if ("MyLinkedList`1" == collection.GetType().Name)
             input = "3";
 
         switch (input)
         {
             case "1":
                 collection.InsertionSortGeneric();
-                Console.WriteLine("Sorted array is:");
+                Console.WriteLine("Sorted collection is:");
                 foreach (var num in collection)
                     Console.Write(" " + num);
                 Console.WriteLine();
                 break;
             case "2":
-                collection.QuickSortGeneric(collection.Count - 1);
-                Console.WriteLine("Sorted array is:");
+                collection.QuickSortGeneric();
+                Console.WriteLine("Sorted collection is:");
                 foreach (var num in collection)
                     Console.Write(" " + num);
                 Console.WriteLine();
                 break;
             case "3":
-                 collection.MergeSortGeneric();
-                Console.WriteLine("Sorted array is:");
+                collection.MergeSortGeneric();
+                Console.WriteLine("Sorted collection is:");
                 foreach (var num in collection)
                     Console.Write(" " + num);
                 Console.WriteLine();
                 break;
             case "4":
                 collection.CombSortGeneric();
-                Console.WriteLine("Sorted array is:");
+                Console.WriteLine("Sorted collection is:");
                 foreach (var num in collection)
                     Console.Write(" " + num);
                 Console.WriteLine();
                 break;
             case "5":
                 collection.CountingSortGeneric();
-                Console.WriteLine("Sorted array is:");
+                Console.WriteLine("Sorted collection is:");
                 foreach (var num in collection)
                     Console.Write(" " + num);
                 Console.WriteLine();
                 break;
             case "6":
                 collection.RadixSortGeneric();
-                Console.WriteLine("Sorted array is:");
+                Console.WriteLine("Sorted collection is:");
                 foreach (var num in collection)
                     Console.Write(" " + num);
                 Console.WriteLine();
                 break;
             case "7":
                 collection.BucketSortGeneric();
-                Console.WriteLine("Sorted array is:");
+                Console.WriteLine("Sorted collection is:");
                 foreach (var num in collection)
                     Console.Write(" " + num);
                 Console.WriteLine();
