@@ -1,5 +1,7 @@
 ﻿using Lab1_Voloshin.Geometry;
 
+//implementation of sorting was made with help of Yurii Kyrpotenko
+
 namespace Lab1_Voloshin
 {
 
