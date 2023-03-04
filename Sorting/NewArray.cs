@@ -1,8 +1,17 @@
 ﻿using System.Collections;
 
-namespace Lab1_Voloshin.Sorting
+namespace Lab1.Sorting
 {
-    internal struct NewArray<T> : IEnumerable<T>, IEnumerator<T> //interfaces for loops
+    public interface IIndexInterface<T>
+    {
+        public T this[int index]
+        {
+            get;
+            set;
+        }
+    }
+
+    internal struct NewArray<T> : IIndexInterface<T>, IEnumerable<T>, IEnumerator<T> //interfaces for loops
     {
         int count = 0;
         public int Count { get => count; } // array size

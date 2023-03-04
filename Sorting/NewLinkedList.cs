@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 // https://codereview.stackexchange.com/questions/138142/linked-list-in-c
 // used that implementation of LinkedList as base, because of the lack of time
-namespace Lab1_Voloshin.Sorting
+namespace Lab1.Sorting
 {
     public class Node<T>
     {
@@ -9,7 +9,7 @@ namespace Lab1_Voloshin.Sorting
         public Node<T> next;
     }
 
-    internal class NewLinkedList<T> : IEnumerable<T>, IEnumerable
+    internal class NewLinkedList<T> : IIndexInterface<T>, IEnumerable<T>, IEnumerable
     {
         private Node<T> headNode;
         private int count;
@@ -88,7 +88,7 @@ namespace Lab1_Voloshin.Sorting
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return this.GetEnumerator();
+            return GetEnumerator();
         }
 
         public IEnumerator<T> GetEnumerator()
@@ -132,8 +132,8 @@ namespace Lab1_Voloshin.Sorting
                     aResult[j] = nItem.data;
                     i++;
                 }
-                this.Clear();
-                this.AddRange(aResult);
+                Clear();
+                AddRange(aResult);
             }
         }
 
@@ -170,7 +170,7 @@ namespace Lab1_Voloshin.Sorting
                 }
                 nCurrent = nCurrent.next;
             }
-            nCurrent.next = (nFirst == null) ? nSecond : nFirst;
+            nCurrent.next = nFirst == null ? nSecond : nFirst;
             return nResult.next;
         }
 

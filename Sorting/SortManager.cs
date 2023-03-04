@@ -1,4 +1,5 @@
-﻿using Lab1_Voloshin.Sorting;
+﻿using Lab1.Sorting;
+using Lab1_Voloshin.Sorting;
 using System.Collections;
 
 static class SortManager

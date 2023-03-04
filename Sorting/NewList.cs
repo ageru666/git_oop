@@ -1,24 +1,24 @@
 ﻿using System.Collections;
 
-namespace Lab1_Voloshin.Sorting
+namespace Lab1.Sorting
 {
-    public class NewList<T> : IEnumerable<T>, IEnumerator<T> 
+    public class NewList<T> : IIndexInterface<T>, IEnumerable<T>, IEnumerator<T>
     {
-        int count = 0; 
-        public int Count { get => count; } 
+        int count = 0;
+        public int Count { get => count; }
 
-        T[] array = new T[1]; 
-        public T[] Array { get => array; } 
-        int index = -1; 
+        T[] array = new T[1];
+        public T[] Array { get => array; }
+        int index = -1;
 
-        public void Clear() 
+        public void Clear()
         {
             array = new T[1];
             count = 0;
             index = -1;
         }
-        
-        public T Min() 
+
+        public T Min()
         {
             dynamic smallest = array[0];
             for (int i = 0; i < count; i++)
@@ -40,7 +40,7 @@ namespace Lab1_Voloshin.Sorting
             return largest;
         }
 
-        public bool Contains(T value) 
+        public bool Contains(T value)
         {
             foreach (T elment in array)
             {
@@ -50,20 +50,20 @@ namespace Lab1_Voloshin.Sorting
             return false;
         }
 
-        public void Add(T mass) 
+        public void Add(T mass)
         {
             count++;
-            System.Array.Resize(ref this.array, count);
-            index++; 
-            this.array[index] = mass; 
+            System.Array.Resize(ref array, count);
+            index++;
+            array[index] = mass;
         }
-        public T this[int index]  
+        public T this[int index]
         {
             get { return array[index]; }
             set { array[index] = value; }
         }
 
-      
+
         #region interface implemetation
         int position = -1;
         public bool MoveNext()

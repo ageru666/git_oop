@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Lab1_Voloshin.Sorting
+namespace Lab1.Sorting
 {
     static class ExtensionSorting
     {
