@@ -106,24 +106,7 @@ static class SortManager
 
     static bool FillArray(dynamic collection, Type type, ref int size)
     {
-        bool isWhiteSpaceSeparator = false;
-        if ( type.Name != "Single")
-            isWhiteSpaceSeparator = true;
-
-        string format = isWhiteSpaceSeparator ? "WHITESPACE separator, example [23,4 -23,431 0,13f]" : "',' or whitespace or ';' separators";
-        Console.WriteLine($"Input values of which array contains using {format}:");
-        string inputValues = Console.ReadLine();
-        if (string.IsNullOrWhiteSpace(inputValues))
-        {
-            Console.WriteLine("Try next time to input some values...");
-            return false;
-        }
-
-        string[] cuttedValues;
-        if (isWhiteSpaceSeparator)
-            cuttedValues = inputValues.Split(" ", StringSplitOptions.TrimEntries);
-        else
-            cuttedValues = inputValues.Split(new string[] { " ", ",", ";" }, StringSplitOptions.TrimEntries);
+        string[] cuttedValues = ParseInput(type);
 
         switch (type.Name)
         {
@@ -200,24 +183,7 @@ static class SortManager
     }
     static bool FillList(dynamic collection, Type type)
     {
-        bool isWhiteSpaceSeparator = false;
-        if (type.Name == "Single")
-            isWhiteSpaceSeparator = true;
-
-        string format = isWhiteSpaceSeparator ? "WHITESPACE separator, example [23,4 -23,431 0,13f]" : "',' or whitespace or ';' separators";
-        Console.WriteLine($"Input values of which list contains using {format}:");
-        string inputValues = Console.ReadLine();
-        if (string.IsNullOrWhiteSpace(inputValues))
-        {
-            Console.WriteLine("Try next time to input some values...");
-            return false;
-        }
-
-        string[] cuttedValues;
-        if (isWhiteSpaceSeparator)
-            cuttedValues = inputValues.Split(" ", StringSplitOptions.TrimEntries);
-        else
-            cuttedValues = inputValues.Split(new string[] { " ", ",", ";" }, StringSplitOptions.TrimEntries);
+        string[] cuttedValues = ParseInput(type);
 
         switch (type.Name)
         {
@@ -294,24 +260,7 @@ static class SortManager
     }
     static bool FillLinkedList(dynamic collection, Type type)
     {
-        bool isWhiteSpaceSeparator = false;
-        if ( type.Name == "Single")
-            isWhiteSpaceSeparator = true;
-
-        string format = isWhiteSpaceSeparator ? "WHITESPACE separator, example [23,4 -23,431 0,13f]" : "',' or whitespace or ';' separators";
-        Console.WriteLine($"Input values of which linkedlist contains using {format}:");
-        string inputValues = Console.ReadLine();
-        if (string.IsNullOrWhiteSpace(inputValues))
-        {
-            Console.WriteLine("Try next time to input some values...");
-            return false;
-        }
-
-        string[] cuttedValues;
-        if (isWhiteSpaceSeparator)
-            cuttedValues = inputValues.Split(" ", StringSplitOptions.TrimEntries);
-        else
-            cuttedValues = inputValues.Split(new string[] { " ", ",", ";" }, StringSplitOptions.TrimEntries);
+        string[] cuttedValues = ParseInput(type);
 
 
         switch (type.Name)
@@ -587,5 +536,32 @@ static class SortManager
                 Console.WriteLine("Incorrect input.");
                 return;
         }
+    }
+    static string[]? ParseInput(Type type)
+    {
+        bool isWhiteSpaceSeparator = false;
+        if (type.Name == "Double" || type.Name == "Single")
+            isWhiteSpaceSeparator = true;
+
+        string format = isWhiteSpaceSeparator ? "WHITESPACE separator, example [23,4 -23,431 0,13f]" : "',' or whitespace or ';' separators";
+        Console.WriteLine($"Input values of which linkedlist contains using {format}:");
+        string inputValues = Console.ReadLine();
+        if (string.IsNullOrWhiteSpace(inputValues))
+        {
+            Console.WriteLine("Try next time to input some values...");
+            return null;
+        }
+
+        if (string.IsNullOrWhiteSpace(inputValues) || inputValues.Length == 0)
+            return null;
+
+
+        string[] cuttedValues;
+        if (isWhiteSpaceSeparator)
+            cuttedValues = inputValues.Split(" ", StringSplitOptions.TrimEntries);
+        else
+            cuttedValues = inputValues.Split(new string[] { " ", ",", ";" }, StringSplitOptions.TrimEntries);
+
+        return cuttedValues;
     }
 }
