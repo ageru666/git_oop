@@ -4,6 +4,12 @@ namespace Lab1.Sorting
 {
     public class NewList<T> : IIndexInterface<T>, IEnumerable<T>, IEnumerator<T>
     {
+        public NewList(int size)
+        {
+            array = new T[size];
+            count = size;
+        }
+
         int count = 0;
         public int Count { get => count; }
 

@@ -25,6 +25,16 @@ namespace Lab1.Sorting
                 AddHead(item);
         }
 
+        public NewLinkedList(int size) : base()
+        {
+            for (int i = 0; i < size; i++)
+            {
+                Node<T> NewNode = new Node<T>() { data = default, next = headNode };
+                headNode = NewNode;
+                count++;
+            }
+        }
+
         private IEnumerable<Node<T>> Nodes
         {
             get
