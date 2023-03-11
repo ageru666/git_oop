@@ -1,5 +1,6 @@
 ﻿using Lab1.Sorting;
 using System.Collections;
+using System.Runtime.CompilerServices;
 
 static class SortManager
 {
@@ -16,15 +17,15 @@ static class SortManager
             {
                 case "1":
                     Console.Clear();
-                    ArraysSorting();
+                     Array();
                     break;
                 case "2":
                     Console.Clear();
-                    ListsSorting();
+                    List();
                     break;
                 case "3":
                     Console.Clear();
-                    LinkedListsSorting();
+                    LinkedList();
                     break;
                 default:
                     Console.Clear();
@@ -40,427 +41,262 @@ static class SortManager
         }
     }
 
-    static void ArraysSorting()
+   static void Array()
     {
-        Console.WriteLine("Enter size of the array:");
-        if (!int.TryParse(Console.ReadLine(), out int size))
-        {
-            Console.WriteLine("Incorrect input.");
-            return;
-        }
-
         IEnumerable arr;
-        Type type;
-        ChooseTypeForArray(out type, out arr, ref size);
-
+        ChooseAndFillArray(out arr);
 
         Console.Clear();
-        Console.WriteLine($"Created custom array of type [{type.Name}] with size of [{size}]");
-
-
-        Console.WriteLine($"Enter numbers");
-        if (!FillArray(arr, type, ref size))
-            return;
-
-        Console.Clear();
-        Console.WriteLine("Entered numbers are:");
-        foreach (var item in arr)
-            Console.Write(" " + item);
 
         SortedCollectionOutput(arr);
     }
-    static void ListsSorting()
+    static void List()
     {
         IEnumerable list;
-        Type type;
-        ChooseTypeForList(out type, out list);
+        ChooseAndFillList(out list);
 
         Console.Clear();
-        Console.WriteLine($"Created custom list of type [{type.Name}]");
-
-
-        Console.WriteLine($"Enter numbers.");
-        if (!FillList(list, type))
-            return;
 
         SortedCollectionOutput(list);
     }
-    static void LinkedListsSorting()
+    static void LinkedList()
     {
         IEnumerable list;
-        Type type;
-        ChooseTypeForLinkedList(out type, out list);
-
+        ChooseAndFillLinkdList(out list);
 
         Console.Clear();
-        Console.WriteLine($"Created custom LinkedList of type [{type.Name}]");
-
-
-        Console.WriteLine($"Enter numbers.");
-        if (!FillLinkedList(list, type))
-            return;
 
         SortedCollectionOutput(list);
     }
 
-    static bool FillArray(dynamic collection, Type type, ref int size)
+    static IIndexInterface<T> FillCollection<T>(IIndexInterface<T> array, ref Type type, ref int size, ref string[] cuttedValues)
     {
-        string[] cuttedValues = ParseInput(type);
-
         switch (type.Name)
         {
             case "Int32":
                 for (int i = 0; i < size; i++)
                 {
                     if (!int.TryParse(cuttedValues[i], out int newInt))
-                    {
-                        Console.WriteLine(cuttedValues[i] + " - cannot be integer");
                         continue;
-                    }
-                    collection[i] = newInt;
+                    array[i] = Unsafe.As<int, T>(ref newInt);
                 }
                 break;
             case "Double":
                 for (int i = 0; i < size; i++)
                 {
                     if (!double.TryParse(cuttedValues[i], out double newDouble))
-                    {
-                        Console.WriteLine(cuttedValues[i] + " - cannot be double");
                         continue;
-                    }
-                    collection[i] = newDouble;
+                    array[i] = Unsafe.As<double, T>(ref newDouble);
                 }
                 break;
             case "Single":
                 for (int i = 0; i < size; i++)
                 {
                     if (!float.TryParse(cuttedValues[i], out float newFloat))
-                    {
-                        Console.WriteLine(cuttedValues[i] + " - cannot be float");
                         continue;
-                    }
-                    collection[i] = newFloat;
+                    array[i] = Unsafe.As<float, T>(ref newFloat);
                 }
                 break;
             case "Int16":
                 for (int i = 0; i < size; i++)
                 {
                     if (!short.TryParse(cuttedValues[i], out short newShort))
-                    {
-                        Console.WriteLine(cuttedValues[i] + " - cannot be short");
                         continue;
-                    }
-                    collection[i] = newShort;
+                    array[i] = Unsafe.As<short, T>(ref newShort);
                 }
                 break;
             case "UInt16":
                 for (int i = 0; i < size; i++)
                 {
                     if (!ushort.TryParse(cuttedValues[i], out ushort newUshort))
-                    {
-                        Console.WriteLine(cuttedValues[i] + " - cannot be ushort");
                         continue;
-                    }
-                    collection[i] = newUshort;
+                    array[i] = Unsafe.As<ushort, T>(ref newUshort);
                 }
                 break;
             case "UInt32":
                 for (int i = 0; i < size; i++)
                 {
                     if (!uint.TryParse(cuttedValues[i], out uint newUint))
-                    {
-                        Console.WriteLine(cuttedValues[i] + " - cannot be uint");
                         continue;
-                    }
-                    collection[i] = newUint;
+                    array[i] = Unsafe.As<uint, T>(ref newUint);
                 }
-                break;
-            default:
                 break;
         }
-        return true;
-    }
-    static bool FillList(dynamic collection, Type type)
-    {
-        string[] cuttedValues = ParseInput(type);
-
-        switch (type.Name)
-        {
-            case "Int32":
-                for (int i = 0; i < cuttedValues.Length; i++)
-                {
-                    if (!int.TryParse(cuttedValues[i], out int newInt))
-                    {
-                        Console.WriteLine(cuttedValues[i] + " - cannot be integer");
-                        continue;
-                    }
-                    collection.Add(newInt);
-                }
-                break;
-            case "Double":
-                for (int i = 0; i < cuttedValues.Length; i++)
-                {
-                    if (!double.TryParse(cuttedValues[i], out double newDouble))
-                    {
-                        Console.WriteLine(cuttedValues[i] + " - cannot be double");
-                        continue;
-                    }
-                    collection.Add(newDouble);
-                }
-                break;
-            case "Single":
-                for (int i = 0; i < cuttedValues.Length; i++)
-                {
-                    if (!float.TryParse(cuttedValues[i], out float newFloat))
-                    {
-                        Console.WriteLine(cuttedValues[i] + " - cannot be float");
-                        continue;
-                    }
-                    collection.Add(newFloat);
-                }
-                break;
-            case "Int16":
-                for (int i = 0; i < cuttedValues.Length; i++)
-                {
-                    if (!short.TryParse(cuttedValues[i], out short newShort))
-                    {
-                        Console.WriteLine(cuttedValues[i] + " - cannot be short");
-                        continue;
-                    }
-                    collection.Add(newShort);
-                }
-                break;
-            case "UInt16":
-                for (int i = 0; i < cuttedValues.Length; i++)
-                {
-                    if (!ushort.TryParse(cuttedValues[i], out ushort newUshort))
-                    {
-                        Console.WriteLine(cuttedValues[i] + " - cannot be ushort");
-                        continue;
-                    }
-                    collection.Add(newUshort);
-                }
-                break;
-            case "UInt32":
-                for (int i = 0; i < cuttedValues.Length; i++)
-                {
-                    if (!uint.TryParse(cuttedValues[i], out uint newUint))
-                    {
-                        Console.WriteLine(cuttedValues[i] + " - cannot be uint");
-                        continue;
-                    }
-                    collection.Add(newUint);
-                }
-                break;
-            default:
-                break;
-        }
-        return true;
-    }
-    static bool FillLinkedList(dynamic collection, Type type)
-    {
-        string[] cuttedValues = ParseInput(type);
-
-
-        switch (type.Name)
-        {
-            case "Int32":
-                for (int i = 0; i < cuttedValues.Length; i++)
-                {
-                    if (!int.TryParse(cuttedValues[i], out int newInt))
-                    {
-                        Console.WriteLine(cuttedValues[i] + " - cannot be integer");
-                        continue;
-                    }
-                    collection.AddLast(newInt);
-                }
-                break;
-            case "Double":
-                for (int i = 0; i < cuttedValues.Length; i++)
-                {
-                    if (!double.TryParse(cuttedValues[i], out double newDouble))
-                    {
-                        Console.WriteLine(cuttedValues[i] + " - cannot be double");
-                        continue;
-                    }
-                    collection.AddLast(newDouble);
-                }
-                break;
-            case "Single":
-                for (int i = 0; i < cuttedValues.Length; i++)
-                {
-                    if (!float.TryParse(cuttedValues[i], out float newFloat))
-                    {
-                        Console.WriteLine(cuttedValues[i] + " - cannot be float");
-                        continue;
-                    }
-                    collection.AddLast(newFloat);
-                }
-                break;
-            case "Int16":
-                for (int i = 0; i < cuttedValues.Length; i++)
-                {
-                    if (!short.TryParse(cuttedValues[i], out short newShort))
-                    {
-                        Console.WriteLine(cuttedValues[i] + " - cannot be short");
-                        continue;
-                    }
-                    collection.AddLast(newShort);
-                }
-                break;
-            case "UInt16":
-                for (int i = 0; i < cuttedValues.Length; i++)
-                {
-                    if (!ushort.TryParse(cuttedValues[i], out ushort newUshort))
-                    {
-                        Console.WriteLine(cuttedValues[i] + " - cannot be ushort");
-                        continue;
-                    }
-                    collection.AddLast(newUshort);
-                }
-                break;
-            case "UInt32":
-                for (int i = 0; i < cuttedValues.Length; i++)
-                {
-                    if (!uint.TryParse(cuttedValues[i], out uint newUint))
-                    {
-                        Console.WriteLine(cuttedValues[i] + " - cannot be uint");
-                        continue;
-                    }
-                    collection.AddLast(newUint);
-                }
-                break;
-            default:
-                break;
-        }
-        return true;
+        return array;
     }
 
-    static void ChooseTypeForArray(out Type type, out IEnumerable collection, ref int size)
+    static void ChooseAndFillArray(out IEnumerable collection)
     {
-        Console.WriteLine("Choose type for Array");
-        Console.WriteLine("1.int");
-        Console.WriteLine("2.double");
-        Console.WriteLine("3.float");
-        Console.WriteLine("4.short");
-        Console.WriteLine("5.ushort");
-        Console.WriteLine("6.uint");
+        Type type;
+        ChooseTypeOutput();
+        string[] cuttedValues = default;
+        int size = default;
+
         switch (Console.ReadLine())
         {
             case "1":
-                collection = new NewArray<int>(size);
                 type = typeof(int);
+                cuttedValues = ParseInput(type);
+                size = cuttedValues.Length;
+                collection = (NewArray<int>)FillCollection(new NewArray<int>(size), ref type, ref size, ref cuttedValues);
                 break;
             case "2":
-                collection = new NewArray<double>(size);
                 type = typeof(double);
+                cuttedValues = ParseInput(type);
+                size = cuttedValues.Length;
+                collection = (NewArray<double>)FillCollection(new NewArray<double>(size), ref type, ref size, ref cuttedValues);
                 break;
             case "3":
-                collection = new NewArray<float>(size);
                 type = typeof(float);
+                cuttedValues = ParseInput(type);
+                size = cuttedValues.Length;
+                collection = (NewArray<float>)FillCollection(new NewArray<float>(size), ref type, ref size, ref cuttedValues);
                 break;
             case "4":
-                collection = new NewArray<short>(size);
                 type = typeof(short);
+                cuttedValues = ParseInput(type);
+                size = cuttedValues.Length;
+                collection = (NewArray<short>)FillCollection(new NewArray<short>(size), ref type, ref size, ref cuttedValues);
                 break;
             case "5":
-                collection = new NewArray<ushort>(size);
                 type = typeof(ushort);
+                cuttedValues = ParseInput(type);
+                size = cuttedValues.Length;
+                collection = (NewArray<ushort>)FillCollection(new NewArray<ushort>(size), ref type, ref size, ref cuttedValues);
                 break;
             case "6":
-                collection = new NewArray<uint>(size);
                 type = typeof(uint);
+                cuttedValues = ParseInput(type);
+                size = cuttedValues.Length;
+                collection = (NewArray<uint>)FillCollection(new NewArray<uint>(size), ref type, ref size, ref cuttedValues);
                 break;
             default:
                 Console.WriteLine("Incorrect input.");
-                type = null;
                 collection = null;
+                type = null;
                 break;
         }
+        Console.Clear();
+        Console.WriteLine($"Created custom array of type [{type.Name}] with size of [{size}]");
     }
-    static void ChooseTypeForList(out Type type, out IEnumerable list)
+    static void ChooseAndFillList(out IEnumerable list)
     {
-        Console.WriteLine("Choose type for List");
-        Console.WriteLine("1.int");
-        Console.WriteLine("2.double");
-        Console.WriteLine("3.float");
-        Console.WriteLine("4.short");
-        Console.WriteLine("5.ushort");
-        Console.WriteLine("6.uint");
+        Type type;
+        ChooseTypeOutput();
+        string[] cuttedValues = default;
+        int size = 0;
+
         switch (Console.ReadLine())
         {
             case "1":
-                list = new NewList<int>();
                 type = typeof(int);
+                cuttedValues = ParseInput(type);
+                size = cuttedValues.Length;
+                list = (NewList<int>)FillCollection(new NewList<int>(size), ref type, ref size, ref cuttedValues);
                 break;
             case "2":
-                list = new NewList<double>();
                 type = typeof(double);
+                cuttedValues = ParseInput(type);
+                size = cuttedValues.Length;
+                list = (NewList<double>)FillCollection(new NewList<double>(size), ref type, ref size, ref cuttedValues);
                 break;
             case "3":
-                list = new NewList<float>();
                 type = typeof(float);
+                cuttedValues = ParseInput(type);
+                size = cuttedValues.Length;
+                list = (NewList<float>)FillCollection(new NewList<float>(size), ref type, ref size, ref cuttedValues);
                 break;
             case "4":
-                list = new NewList<short>();
                 type = typeof(short);
+                cuttedValues = ParseInput(type);
+                size = cuttedValues.Length;
+                list = (NewList<short>)FillCollection(new NewList<short>(size), ref type, ref size, ref cuttedValues);
                 break;
             case "5":
-                list = new NewList<ushort>();
                 type = typeof(ushort);
+                cuttedValues = ParseInput(type);
+                size = cuttedValues.Length;
+                list = (NewList<ushort>)FillCollection(new NewList<ushort>(size), ref type, ref size, ref cuttedValues);
                 break;
             case "6":
-                list = new NewList<uint>();
                 type = typeof(uint);
+                cuttedValues = ParseInput(type);
+                size = cuttedValues.Length;
+                list = (NewList<uint>)FillCollection(new NewList<uint>(size), ref type, ref size, ref cuttedValues);
                 break;
             default:
                 Console.WriteLine("Incorrect input.");
-                type = null;
                 list = null;
+                type = null;
                 break;
         }
+        Console.Clear();
+        Console.WriteLine($"Created custom array of type [{type.Name}] with size of [{size}]");
     }
-    static void ChooseTypeForLinkedList(out Type type, out IEnumerable collection)
+    static void ChooseAndFillLinkdList(out IEnumerable collection)
     {
-        Console.WriteLine("Choose type for LinkedList");
+        Type type;
+        ChooseTypeOutput();
+        string[] cuttedValues = default;
+        int size = 0;
+
+        switch (Console.ReadLine())
+        {
+            case "1":
+                type = typeof(int);
+                cuttedValues = ParseInput(type);
+                size = cuttedValues.Length;
+                collection = (NewList<int>)FillCollection(new NewList<int>(size), ref type, ref size, ref cuttedValues);
+                break;
+            case "2":
+                type = typeof(double);
+                cuttedValues = ParseInput(type);
+                size = cuttedValues.Length;
+                collection = (NewList<double>)FillCollection(new NewList<double>(size), ref type, ref size, ref cuttedValues);
+                break;
+            case "3":
+                type = typeof(float);
+                cuttedValues = ParseInput(type);
+                size = cuttedValues.Length;
+                collection = (NewList<float>)FillCollection(new NewList<float>(size), ref type, ref size, ref cuttedValues);
+                break;
+            case "4":
+                type = typeof(short);
+                cuttedValues = ParseInput(type);
+                size = cuttedValues.Length;
+                collection = (NewList<short>)FillCollection(new NewList<short>(size), ref type, ref size, ref cuttedValues);
+                break;
+            case "5":
+                type = typeof(ushort);
+                cuttedValues = ParseInput(type);
+                size = cuttedValues.Length;
+                collection = (NewList<ushort>)FillCollection(new NewList<ushort>(size), ref type, ref size, ref cuttedValues);
+                break;
+            case "6":
+                type = typeof(uint);
+                cuttedValues = ParseInput(type);
+                size = cuttedValues.Length;
+                collection = (NewList<uint>)FillCollection(new NewList<uint>(size), ref type, ref size, ref cuttedValues);
+                break;
+            default:
+                Console.WriteLine("Incorrect input.");
+                collection = null;
+                type = null;
+                break;
+        }
+        Console.Clear();
+        Console.WriteLine($"Created custom array of type [{type.Name}] with size of [{size}]");
+    }
+
+    static void ChooseTypeOutput()
+    {
+        Console.WriteLine("Choose type");
         Console.WriteLine("1.int");
         Console.WriteLine("2.double");
         Console.WriteLine("3.float");
         Console.WriteLine("4.short");
         Console.WriteLine("5.ushort");
         Console.WriteLine("6.uint");
-        switch (Console.ReadLine())
-        {
-            case "1":
-                collection = new NewLinkedList<int>();
-                type = typeof(int);
-                break;
-            case "2":
-                collection = new NewLinkedList<double>();
-                type = typeof(double);
-                break;
-            case "3":
-                collection = new NewLinkedList<float>();
-                type = typeof(float);
-                break;
-            case "4":
-                collection = new NewLinkedList<short>();
-                type = typeof(short);
-                break;
-            case "5":
-                collection = new NewLinkedList<ushort>();
-                type = typeof(ushort);
-                break;
-            case "6":
-                collection = new NewLinkedList<uint>();
-                type = typeof(uint);
-                break;
-            default:
-                Console.WriteLine("Incorrect input.");
-                type = null;
-                collection = null;
-                break;
-        }
     }
 
     static void SortedCollectionOutput(IEnumerable collection)
