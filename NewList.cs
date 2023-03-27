@@ -2,9 +2,9 @@
 
 namespace Lab1.Sorting
 {
-    public class NewList<T> : IIndexInterface<T>, IEnumerable<T>, IEnumerator<T>
+    public class NewList<T> : IIndexInterface<T>, IEnumerable<T>, IEnumerator<T>///custom list class with interfaces for loops
     {
-        public NewList(int size)
+        public NewList(int size)///create new list
         {
             array = new T[size];
             count = size;
@@ -17,14 +17,14 @@ namespace Lab1.Sorting
         public T[] Array { get => array; }
         int index = -1;
 
-        public void Clear()
+        public void Clear()///clear list
         {
             array = new T[1];
             count = 0;
             index = -1;
         }
 
-        public T Min()
+        public T Min()///finding the minimum element in an array
         {
             dynamic smallest = array[0];
             for (int i = 0; i < count; i++)
@@ -35,7 +35,7 @@ namespace Lab1.Sorting
             return smallest;
         }
 
-        public T Max()
+        public T Max()///finding the maximum element in an array
         {
             dynamic largest = array[count];
             for (int i = 0; i < count; i++)
@@ -46,7 +46,7 @@ namespace Lab1.Sorting
             return largest;
         }
 
-        public bool Contains(T value)
+        public bool Contains(T value)///check for contatining elements in array
         {
             foreach (T elment in array)
             {
@@ -56,7 +56,7 @@ namespace Lab1.Sorting
             return false;
         }
 
-        public void Add(T mass)
+        public void Add(T mass)///added element to array
         {
             count++;
             System.Array.Resize(ref array, count);

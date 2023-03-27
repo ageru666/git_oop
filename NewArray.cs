@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 
-namespace Lab1.Sorting
+namespace Lab1.Sorting 
 {
-    public interface IIndexInterface<T>
+    public interface IIndexInterface<T>///interface for indexator pattern
     {
         public T this[int index]
         {
@@ -11,7 +11,7 @@ namespace Lab1.Sorting
         }
     }
 
-    internal struct NewArray<T> : IIndexInterface<T>, IEnumerable<T>, IEnumerator<T> //interfaces for loops
+    internal struct NewArray<T> : IIndexInterface<T>, IEnumerable<T>, IEnumerator<T> ///custom array class with interfaces for loops
     {
         int count = 0;
         public int Count { get => count; } // array size
@@ -19,13 +19,13 @@ namespace Lab1.Sorting
         public T[] Array { get => array; } // array size
 
 
-        public NewArray(int size = 1)
+        public NewArray(int size = 1)/// constructor
         {
             array = new T[size];
             count = array.Length;
         }
 
-        public T Min()
+        public T Min() ///finding the minimum element in an array
         {
             dynamic smallest = array[0];
             for (int i = 0; i < count; i++)
@@ -36,7 +36,7 @@ namespace Lab1.Sorting
             return smallest;
         }
 
-        public T Max()
+        public T Max() ///finding the maximum element in an array
         {
             dynamic largest = array[count];
             for (int i = 0; i < count; i++)
@@ -47,7 +47,7 @@ namespace Lab1.Sorting
             return largest;
         }
 
-        public bool Contains(T value)
+        public bool Contains(T value)///check for contatining elements in array
         {
             foreach (T elment in array)
             {
@@ -57,7 +57,7 @@ namespace Lab1.Sorting
             return false;
         }
 
-        public T this[int index]  //indexator
+        public T this[int index]  ///indexator
         {
             get { return array[index]; }
             set { array[index] = value; }
@@ -89,65 +89,6 @@ namespace Lab1.Sorting
 
         #endregion
 
-        #region Sorting
-
-
-
-
-        public void CombSort()
-        {
-            int arrayLength = count;
-            int currentStep = arrayLength - 1;
-            dynamic? value;
-
-            while (currentStep > 1)
-            {
-                for (int i = 0; i + currentStep < array.Length; i++)
-                {
-                    value = array[i];
-                    if (value > array[i + currentStep])
-                    {
-                        Swap(ref array[i], ref array[i + currentStep]);
-                    }
-                }
-                currentStep = GetNextStep(currentStep);
-            }
-
-            //bubble sort
-            for (int i = 1; i < arrayLength; i++)
-            {
-                bool swapFlag = false;
-                for (int j = 0; j < arrayLength - i; j++)
-                {
-                    value = array[j];
-                    if (value > array[j + 1])
-                    {
-                        Swap(ref array[j], ref array[j + 1]);
-                        swapFlag = true;
-                    }
-                }
-
-                if (!swapFlag)
-                    break;
-            }
-        }
-        int GetNextStep(int step)
-        {
-            step = step * 1000 / 1247;
-            return step > 1 ? step : 1;
-        }
-        void Swap(ref T value1, ref T value2)
-        {
-            dynamic temp = value1;
-            value1 = value2;
-            value2 = temp;
-        }
-
-
-
-
-
-
-        #endregion
+       
     }
 }

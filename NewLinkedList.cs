@@ -3,29 +3,31 @@
 // used that implementation of LinkedList as base, because of the lack of time
 namespace Lab1.Sorting
 {
-    public class Node<T>
+    public class Node<T>///class for one node
     {
         public T data;
         public Node<T> next;
     }
 
-    internal class NewLinkedList<T> : IIndexInterface<T>, IEnumerable<T>, IEnumerable
+    internal class NewLinkedList<T> : IIndexInterface<T>, IEnumerable<T>, IEnumerable///custom linked list class with interfaces for loops
     {
         private Node<T> headNode;
         private int count;
         public int Count { get { { return count; } } }
-        public NewLinkedList()
+
+        public NewLinkedList()///consturctor
         {
             headNode = null;
             count = 0;
         }
-        public NewLinkedList(IEnumerable<T> Items)
+
+        public NewLinkedList(IEnumerable<T> Items)///constructor for filling with given collection
         {
             foreach (T item in Items)
                 AddHead(item);
         }
 
-        public NewLinkedList(int size) : base()
+        public NewLinkedList(int size)///constructor to create linked list with custom size
         {
             for (int i = 0; i < size; i++)
             {
@@ -35,7 +37,7 @@ namespace Lab1.Sorting
             }
         }
 
-        private IEnumerable<Node<T>> Nodes
+        private IEnumerable<Node<T>> Nodes///get all nodes inside class
         {
             get
             {
@@ -48,7 +50,7 @@ namespace Lab1.Sorting
             }
         }
 
-        private Node<T> NodeAt(int index)
+        private Node<T> NodeAt(int index)///get node by index
         {
             if (index < 0 || index + 1 > count)
             {
@@ -66,15 +68,8 @@ namespace Lab1.Sorting
             return null;
         }
 
-        public void ForEach(Action<T> action)
-        {
-            foreach (Node<T> item in Nodes)
-            {
-                action(item.data);
-            }
-        }
 
-        public void AddRange(IEnumerable<T> Items)
+        public void AddRange(IEnumerable<T> Items)///add collection to the head
         {
             foreach (T item in Items)
             {
@@ -82,7 +77,7 @@ namespace Lab1.Sorting
             }
         }
 
-        public void AddRange(params T[] Items)
+        public void AddRange(params T[] Items)///add collection to the head
         {
             foreach (T item in Items)
             {
@@ -90,7 +85,7 @@ namespace Lab1.Sorting
             }
         }
 
-        public T this[int index]
+        public T this[int index]///indexator
         {
             get { return NodeAt(index).data; }
             set { NodeAt(index).data = value; }
@@ -109,7 +104,7 @@ namespace Lab1.Sorting
             }
         }
 
-        public bool Exists(T value)
+        public bool Exists(T value)///check for containing value in collection
         {
             foreach (Node<T> item in Nodes)
             {
@@ -119,79 +114,21 @@ namespace Lab1.Sorting
             return false;
         }
 
-        public void Clear()
+        public void Clear()///clear list
         {
             headNode = null;
             count = 0;
         }
 
-        public void Shuffle()
-        {
-            if (headNode != null)
-            {
-                Random rRand = new Random();
-                T[] aResult = new T[count];
-                int i = 0;
 
-                foreach (Node<T> nItem in Nodes)
-                {
-                    int j = rRand.Next(i + 1);
-                    if (i != j)
-                        aResult[i] = aResult[j];
-
-                    aResult[j] = nItem.data;
-                    i++;
-                }
-                Clear();
-                AddRange(aResult);
-            }
-        }
-
-        public void MergeSort() => headNode = MergeSortSub(headNode);
-
-        private Node<T> MergeSortSub(Node<T> nHead)
-        {
-            if (nHead == null || nHead.next == null) { return nHead; }
-            Node<T> nSeeker = nHead;
-            Node<T> nMiddle = nSeeker;
-            while (nSeeker.next != null && nSeeker.next.next != null)
-            {
-                nMiddle = nMiddle.next;
-                nSeeker = nSeeker.next.next;
-            }
-            Node<T> sHalf = nMiddle.next;
-            nMiddle.next = null;
-            Node<T> nFirst = MergeSortSub(nHead);
-            Node<T> nSecond = MergeSortSub(sHalf);
-            Node<T> nResult = new Node<T>();
-            Node<T> nCurrent = nResult;
-            while (nFirst != null && nSecond != null)
-            {
-                IComparer<T> comparer = Comparer<T>.Default;
-                if (comparer.Compare(nFirst.data, nSecond.data) < 1)
-                {
-                    nCurrent.next = nFirst;
-                    nFirst = nFirst.next;
-                }
-                else
-                {
-                    nCurrent.next = nSecond;
-                    nSecond = nSecond.next;
-                }
-                nCurrent = nCurrent.next;
-            }
-            nCurrent.next = nFirst == null ? nSecond : nFirst;
-            return nResult.next;
-        }
-
-        public void AddHead(T item)
+        public void AddHead(T item)/// added head
         {
             Node<T> NewNode = new Node<T>() { data = item, next = headNode };
             headNode = NewNode;
             count++;
         }
 
-        public IEnumerable<int> AllIndexesOf(T Value)
+        public IEnumerable<int> AllIndexesOf(T Value)///return collection of indexes of given element
         {
             int IndexCount = 0;
             foreach (Node<T> item in Nodes)
@@ -202,7 +139,7 @@ namespace Lab1.Sorting
             }
         }
 
-        public int IndexOf(T Value)
+        public int IndexOf(T Value)///return index of given element
         {
             IEnumerator<int> eN = AllIndexesOf(Value).GetEnumerator();
             if (eN.MoveNext())
@@ -211,17 +148,9 @@ namespace Lab1.Sorting
             return -1;
         }
 
-        public int LastIndexOf(T Value)
-        {
-            IEnumerator<int> eN = AllIndexesOf(Value).GetEnumerator();
-            int Result = -1;
-            while (eN.MoveNext())
-                Result = eN.Current;
+       
 
-            return Result;
-        }
-
-        public void RemoveAll(Func<T, bool> match)
+        public void RemoveAll(Func<T, bool> match)///delete list
         {
             while (headNode != null && match(headNode.data)) //  head node
             {
@@ -244,7 +173,7 @@ namespace Lab1.Sorting
             }
         }
 
-        public IEnumerable<T> Find(Predicate<T> match)
+        public IEnumerable<T> Find(Predicate<T> match)///find elemet by predicat
         {
             foreach (Node<T> item in Nodes)
             {
@@ -253,7 +182,7 @@ namespace Lab1.Sorting
             }
         }
 
-        public void Reverse()
+        public void Reverse()///list reverse
         {
             Node<T> nCurrent = headNode;
             Node<T> nBack = null;
@@ -267,7 +196,7 @@ namespace Lab1.Sorting
             headNode = nBack;
         }
 
-        public void RemoveFirst()
+        public void RemoveFirst()///remove element from the start
         {
 
             if (headNode != null)
@@ -277,7 +206,7 @@ namespace Lab1.Sorting
             }
         }
 
-        public void RemoveLast()
+        public void RemoveLast()///remove element from the end
         {
             if (headNode != null)
             {
@@ -290,7 +219,7 @@ namespace Lab1.Sorting
             }
         }
 
-        public void AddLast(T item)
+        public void AddLast(T item)///add element to the end
         {
             Node<T> NewNode = new Node<T>() { data = item, next = null };
             if (headNode == null)
@@ -301,7 +230,7 @@ namespace Lab1.Sorting
             count++;
         }
 
-        public void Insert(T item, int index)
+        public void Insert(T item, int index)///insert element by index
         {
             if (index < 0 || index + 1 > count)
                 throw new IndexOutOfRangeException("Index");
@@ -320,7 +249,7 @@ namespace Lab1.Sorting
             count++;
         }
 
-        public void RemoveAt(int index)
+        public void RemoveAt(int index)///remove element by index
         {
             if (index < 0 || index + 1 > count)
                 throw new IndexOutOfRangeException("Index");
@@ -337,7 +266,7 @@ namespace Lab1.Sorting
             count--;
         }
 
-        public void RemoveRange(int index, int count)
+        public void RemoveRange(int index, int count)///remove element starting at index + counting
         {
             if (index < 0 || index + count > this.count)
                 throw new IndexOutOfRangeException("Index");

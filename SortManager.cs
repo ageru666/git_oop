@@ -2,9 +2,9 @@
 using System.Collections;
 using System.Runtime.CompilerServices;
 
-static class SortManager
+static class SortManager///class manager for using of sorting collections
 {
-    public static void SortMenuSwitcher()
+    public static void SortMenuSwitcher()///entry point for sorting collections
     {
         try
         {
@@ -41,7 +41,7 @@ static class SortManager
         }
     }
 
-   static void Array()
+    static void Array()///method wrapper for creating and sorting array
     {
         IEnumerable arr;
         ChooseAndFillArray(out arr);
@@ -50,7 +50,7 @@ static class SortManager
 
         SortedCollectionOutput(arr);
     }
-    static void List()
+    static void List()///method wrapper for creating and sorting list
     {
         IEnumerable list;
         ChooseAndFillList(out list);
@@ -59,7 +59,7 @@ static class SortManager
 
         SortedCollectionOutput(list);
     }
-    static void LinkedList()
+    static void LinkedList()///method wrapper for creating and sorting linked list
     {
         IEnumerable list;
         ChooseAndFillLinkdList(out list);
@@ -69,7 +69,7 @@ static class SortManager
         SortedCollectionOutput(list);
     }
 
-    static IIndexInterface<T> FillCollection<T>(IIndexInterface<T> array, ref Type type, ref int size, ref string[] cuttedValues)
+    static IIndexInterface<T> FillCollection<T>(IIndexInterface<T> array, ref Type type, ref int size, ref string[] cuttedValues)///fill given generic collection method
     {
         switch (type.Name)
         {
@@ -125,7 +125,7 @@ static class SortManager
         return array;
     }
 
-    static void ChooseAndFillArray(out IEnumerable collection)
+    static void ChooseAndFillArray(out IEnumerable collection)///method wrapper for choosing type and fill array
     {
         Type type;
         ChooseTypeOutput();
@@ -179,7 +179,7 @@ static class SortManager
         Console.Clear();
         Console.WriteLine($"Created custom array of type [{type.Name}] with size of [{size}]");
     }
-    static void ChooseAndFillList(out IEnumerable list)
+    static void ChooseAndFillList(out IEnumerable list)///method wrapper for choosing type and fill list
     {
         Type type;
         ChooseTypeOutput();
@@ -233,7 +233,7 @@ static class SortManager
         Console.Clear();
         Console.WriteLine($"Created custom array of type [{type.Name}] with size of [{size}]");
     }
-    static void ChooseAndFillLinkdList(out IEnumerable collection)
+    static void ChooseAndFillLinkdList(out IEnumerable collection)///method wrapper for choosing type and fill linked list
     {
         Type type;
         ChooseTypeOutput();
@@ -288,7 +288,7 @@ static class SortManager
         Console.WriteLine($"Created custom array of type [{type.Name}] with size of [{size}]");
     }
 
-    static void ChooseTypeOutput()
+    static void ChooseTypeOutput()///choose type
     {
         Console.WriteLine("Choose type");
         Console.WriteLine("1.int");
@@ -299,7 +299,7 @@ static class SortManager
         Console.WriteLine("6.uint");
     }
 
-    static void SortedCollectionOutput(IEnumerable collection)
+    static void SortedCollectionOutput(IEnumerable collection)///choose type of sorting
     {
         Console.WriteLine("Collection filled up!");
         Console.WriteLine("We are almost done!\n");
@@ -372,7 +372,7 @@ static class SortManager
                 return;
         }
     }
-    static string[]? ParseInput(Type type)
+    static string[]? ParseInput(Type type)///parse input to the collection 
     {
         bool isWhiteSpaceSeparator = false;
         if (type.Name == "Double" || type.Name == "Single")

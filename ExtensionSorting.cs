@@ -2,10 +2,10 @@
 
 namespace Lab1.Sorting
 {
-    static class ExtensionSorting
+    static class ExtensionSorting///class for all implemented sort algorithms
     {
-        static bool isRecursion = false;
-        static bool CheckForCorrectClass(dynamic myClass)
+        static bool isRecursion = false;///check for recursion
+        static bool CheckForCorrectClass(dynamic myClass)///check for the correctness of the class (arrays, lists, linked list)
         {
             if (myClass.GetType().Name == typeof(NewArray<>).Name ||
                 myClass.GetType().Name == typeof(NewList<>).Name ||
@@ -14,7 +14,7 @@ namespace Lab1.Sorting
             Console.WriteLine("This methods made only for my custom generic classes");
             return false;
         }
-        static dynamic Min(dynamic array)
+        static dynamic Min(dynamic array)///finding the minimum element in an array
         {
             dynamic smallest = array[0];
             for (int i = 0; i < array.Length; i++)
@@ -24,7 +24,7 @@ namespace Lab1.Sorting
             }
             return smallest;
         }
-        static dynamic Max(dynamic array)
+        static dynamic Max(dynamic array)///finding the maximum element in an array
         {
             dynamic largest = array[array.Length - 1];
             for (int i = 0; i < array.Length; i++)
@@ -37,7 +37,7 @@ namespace Lab1.Sorting
 
 
 
-        public static void InsertionSortGeneric<T>(this T myClass)
+        public static void InsertionSortGeneric<T>(this T myClass)///template method for insertion sort
         {
             if (CheckForCorrectClass(myClass) == false) return;
             dynamic dynamicT = myClass;
@@ -68,13 +68,13 @@ namespace Lab1.Sorting
             }
         }
 
-        public static void QuickSortGeneric<T>(this T myClass)
+        public static void QuickSortGeneric<T>(this T myClass)///wrapper for quick sort
         {
             dynamic dynamicT = myClass;
             QuickSort<T>(myClass, dynamicT.Count - 1);
         }
 
-        public static void QuickSort<T>(T myClass, int lastIndex, int startInd = 0)
+        public static void QuickSort<T>(T myClass, int lastIndex, int startInd = 0)///template method for quick sort algorithm
         {
             isRecursion = true;
             if (CheckForCorrectClass(myClass) == false && isRecursion == false) return;
@@ -108,7 +108,7 @@ namespace Lab1.Sorting
             isRecursion = false;
         }
 
-        public static void CountingSortGeneric<T>(this T myClass)
+        public static void CountingSortGeneric<T>(this T myClass)///template method for counting sort
         {
             if (CheckForCorrectClass(myClass) == false) return;
             dynamic dynamicT = myClass;
@@ -132,7 +132,7 @@ namespace Lab1.Sorting
                 array[i] = sortedArray[i];
         }
 
-        public static void MergeSortGeneric<T>(this T myClass)
+        public static void MergeSortGeneric<T>(this T myClass)///template method for merge sort
         {
             dynamic dynamicT = myClass;
             if ("MyLinkedList`1" == dynamicT.GetType().Name)
@@ -149,7 +149,7 @@ namespace Lab1.Sorting
 
             isRecursion = false;
         }
-        static void MergeSortRecursion(int left, int right, dynamic arr = default)
+        static void MergeSortRecursion(int left, int right, dynamic arr = default)///splitting an array into two parts
         {
             if (left < right)
             {
@@ -159,7 +159,7 @@ namespace Lab1.Sorting
                 MergeArr(arr, left, middle, right);
             }
         }
-        static void MergeArr(dynamic arr, int left, int middle, int right)
+        static void MergeArr(dynamic arr, int left, int middle, int right)///implementation of merge sort algorithm
         {
             var leftArrayLength = middle - left + 1;
             var rightArrayLength = right - middle;
@@ -187,10 +187,9 @@ namespace Lab1.Sorting
         }
 
 
-        public static void CombSortGeneric<T>(this T myClass)
+        public static void CombSortGeneric<T>(this T myClass) ///template method for comb sort
         {
-            Console.WriteLine("Comb sort no implemented yet.");
-            return;
+           return;
 
             if (CheckForCorrectClass(myClass) == false) return;
             dynamic dynamicT = myClass;
@@ -213,7 +212,7 @@ namespace Lab1.Sorting
                 currentStep = GetNextStep(currentStep);
             }
 
-            //bubble sort
+            ///include bubble sort
             for (int i = 1; i < arrayLength; i++)
             {
                 bool swapFlag = false;
@@ -232,12 +231,12 @@ namespace Lab1.Sorting
             }
             dynamicT.Array = arr;
         }
-        static int GetNextStep(int step)
+        static int GetNextStep(int step)///part of combsort algorithm
         {
             step = step * 1000 / 1247;
             return step > 1 ? step : 1;
         }
-        static void Swap<T>(T value1, T value2)
+        static void Swap<T>(T value1, T value2)///part of combsort algorithm
         {
             T temp = value1;
             value1 = value2;
@@ -245,7 +244,7 @@ namespace Lab1.Sorting
         }
 
 
-        public static void BucketSortGeneric<T>(this T myClass)
+        public static void BucketSortGeneric<T>(this T myClass)///template method for bucket sort
         {
             if (CheckForCorrectClass(myClass) == false) return;
             dynamic dynamicT = myClass;
@@ -283,7 +282,7 @@ namespace Lab1.Sorting
         }
 
         // Algorithm was taken from this web-site https://en.wikibooks.org/wiki/Algorithm_Implementation/Sorting/Radix_sort and reworked to generic types
-        public static void RadixSortGeneric<T>(this T myClass)
+        public static void RadixSortGeneric<T>(this T myClass)///template method for radix sort
         {
             if (CheckForCorrectClass(myClass) == false) return;
             dynamic dynamicT = myClass;

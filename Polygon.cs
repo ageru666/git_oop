@@ -65,7 +65,7 @@ namespace Lab1_Voloshin.Geometry
                 triangles[trainPos] = new Triangle(points[ai], points[bi], points[ci]);
         }
 
-        private int FindNextNotTaken(int startPos) 
+        private int FindNextNotTaken(int startPos) /// take angle that wasn't processed
         {
             startPos %= points.Length;
             if (!taken[startPos])
@@ -82,7 +82,7 @@ namespace Lab1_Voloshin.Geometry
             return -1;
         }
 
-        private bool IsLeft(PointF a, PointF b, PointF c) 
+        private bool IsLeft(PointF a, PointF b, PointF c) ///
         {
             float abX = b.X - a.X;
             float abY = b.Y - a.Y;
