@@ -1,14 +1,14 @@
 ﻿using System.Drawing;
 
-namespace Lab1_Voloshin.Geometry
+namespace Lab1.Geometry
 {
-    class Polygon
+    class Polygon///class for polygon
     {
         private PointF[] points; 
         private Triangle[] triangles; 
         private bool[] taken; 
 
-        public Polygon(float[] points) 
+        public Polygon(float[] points) ///constructor
         {
             if (points.Length % 2 == 1 || points.Length < 6)
                 throw new Exception(); 
@@ -24,7 +24,7 @@ namespace Lab1_Voloshin.Geometry
             Triangulate();
         }
 
-        private void Triangulate() 
+        private void Triangulate()///implementation of triangulation algorithm
         {
             int trainPos = 0;
             int leftPoints = points.Length; 
@@ -82,7 +82,7 @@ namespace Lab1_Voloshin.Geometry
             return -1;
         }
 
-        private bool IsLeft(PointF a, PointF b, PointF c) ///
+        private bool IsLeft(PointF a, PointF b, PointF c) ///check for left point
         {
             float abX = b.X - a.X;
             float abY = b.Y - a.Y;
@@ -92,7 +92,7 @@ namespace Lab1_Voloshin.Geometry
             return abX * acY - acX * abY < 0;
         }
 
-        private bool IsPointInside(PointF a, PointF b, PointF c, PointF p) 
+        private bool IsPointInside(PointF a, PointF b, PointF c, PointF p) /// check for point inside
         {
             float ab = (a.X - p.X) * (b.Y - a.Y) - (b.X - a.X) * (a.Y - p.Y);
             float bc = (b.X - p.X) * (c.Y - b.Y) - (c.X - b.X) * (b.Y - p.Y);
@@ -101,7 +101,7 @@ namespace Lab1_Voloshin.Geometry
             return (ab >= 0 && bc >= 0 && ca >= 0) || (ab <= 0 && bc <= 0 && ca <= 0);
         }
 
-        private bool CanBuildTriangle(int ai, int bi, int ci) 
+        private bool CanBuildTriangle(int ai, int bi, int ci) ///check if we can build trinagle(part of triangulation)
         {
             for (int i = 0; i < points.Length; i++) 
                 if (i != ai && i != bi && i != ci) 
@@ -120,7 +120,7 @@ namespace Lab1_Voloshin.Geometry
             return triangles;
         }
 
-        public double GetArea() 
+        public double GetArea() ///find area
         {
             if (triangles == null)
                 return 0; 

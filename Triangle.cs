@@ -1,8 +1,8 @@
 ﻿using System.Drawing;
 
-namespace Lab1_Voloshin.Geometry
+namespace Lab1.Geometry
 {
-    class Triangle
+    class Triangle///class for triangle
     {
         private PointF a, b, c;
         private uint[] sides;
@@ -11,19 +11,19 @@ namespace Lab1_Voloshin.Geometry
         public PointF B { get => b; }
         public PointF C { get => c; }
 
-        public Triangle(PointF a, PointF b, PointF c)
+        public Triangle(PointF a, PointF b, PointF c)///constructor points
         {
             this.a = a;
             this.b = b;
             this.c = c;
         }
 
-        public Triangle(ref uint[] sides)
+        public Triangle(ref uint[] sides)///constructor
         {
             this.sides = sides;
         }
 
-        public double GetArea()
+        public double GetArea()///area of triangle
         {
             double a = Side(this.a, this.b);
             double b = Side(this.b, this.c);
@@ -33,14 +33,14 @@ namespace Lab1_Voloshin.Geometry
             return Math.Sqrt(p * (p - a) * (p - b) * (p - c));
         }
 
-        private double Side(PointF a, PointF b)
+        private double Side(PointF a, PointF b)///side length
         {
             float x = a.X - b.X;
             float y = a.Y - b.Y;
             return Math.Sqrt(x * x + y * y);
         }
 
-        public void CalculateTriangle()
+        public void CalculateTriangle()///check for type of triangle
         {
             double p = (sides[0] + sides[1] + sides[2]) / 2;
             Console.WriteLine($"Area of your triangle is: {Math.Sqrt(p * (p - sides[0]) * (p - sides[1]) * (p - sides[2]))}  square cm");

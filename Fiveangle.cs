@@ -1,6 +1,6 @@
-﻿namespace Lab1_Voloshin.Geometry
+﻿namespace Lab1.Geometry
 {
-    internal class Fiveangle
+    internal class Fiveangle///class for fiveangle
     {
         uint a, b, c, d, e;
         uint[] sides;
@@ -10,7 +10,7 @@
         public uint D { get => d; }
         public uint E { get => e; }
 
-        public Fiveangle(uint a, uint b, uint c, uint d, uint e)
+        public Fiveangle(uint a, uint b, uint c, uint d, uint e)///contructor
         {
             this.a = a;
             this.b = b;
@@ -20,7 +20,7 @@
             sides = new uint[] { a,b,c,d,e };
         }
 
-        public void CalculateFiveangle()
+        public void CalculateFiveangle()///check for rightness of fiveangle and find area
         {
             if (sides[0] == sides[1] && sides[0] == sides[2] && sides[0] == sides[3] && sides[0] == sides[4])
             {

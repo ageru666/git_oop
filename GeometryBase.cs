@@ -1,11 +1,11 @@
-﻿namespace Lab1_Voloshin.Geometry
+﻿namespace Lab1.Geometry
 {
-    internal class GeometryBase
+    internal class GeometryBase///class manager for using geometry
     {
         static uint[] sides;
         static float[] nAngleVectors;
 
-        public static void AnyAngleInput() // entry point
+        public static void AnyAngleInput() /// entry point
         {
             uint n;
             Console.WriteLine("How much angles do you want?:");
@@ -58,7 +58,7 @@
                 Console.WriteLine("Area is: " + polygon.GetArea());
             }
         }
-        static void CalculatePerimeterAndArea()
+        static void CalculatePerimeterAndArea()/// calculate perimeter and area
         {
             uint P = 0;
             foreach (var item in sides)

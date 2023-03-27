@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lab1_Voloshin.Geometry
+namespace Lab1.Geometry
 {
-    internal class Fourangle
+    internal class Fourangle///class for fourangle
     {
         uint a, b, c, d;
         uint[] sides;
@@ -16,7 +16,7 @@ namespace Lab1_Voloshin.Geometry
         public uint C { get => c; }
         public uint D { get => d; }
 
-        public Fourangle(uint a, uint b, uint c, uint d)
+        public Fourangle(uint a, uint b, uint c, uint d)///constructor
         {
             this.a = a;
             this.b = b;
@@ -24,7 +24,7 @@ namespace Lab1_Voloshin.Geometry
             this.d = d;
             sides = new uint[] { a,b,c,d };
         }
-        public void CalculateFourangle()
+        public void CalculateFourangle()///check for type of fourangle and finding area
         {
             if (sides[0] == sides[1] && sides[2] == sides[3] && sides[0] == sides[3])
             {

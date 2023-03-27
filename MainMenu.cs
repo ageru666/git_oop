@@ -1,18 +1,18 @@
-﻿using Lab1_Voloshin.Geometry;
+﻿using Lab1.Geometry;
 
 //implementation of sorting was made with help of Yurii Kyrpotenko
 
-namespace Lab1_Voloshin
+namespace Lab1
 {
 
-    static class MainMenu
+    static class MainMenu///class menu with options(sorting or geometry)
     {
         static void Main(string[] args)
         {
             Menu();
         }
 
-        static void Menu()
+        static void Menu()//menu
         {
             Console.WriteLine("Choose one of the options below.");
             Console.WriteLine("1. Geometry");
