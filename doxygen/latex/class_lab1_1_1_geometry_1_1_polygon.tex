@@ -1,0 +1,60 @@
+\hypertarget{class_lab1_1_1_geometry_1_1_polygon}{}\doxysection{Lab1.\+Geometry.\+Polygon Class Reference}
+\label{class_lab1_1_1_geometry_1_1_polygon}\index{Lab1.Geometry.Polygon@{Lab1.Geometry.Polygon}}
+
+
+class for polygon  
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_lab1_1_1_geometry_1_1_polygon_a4b0a3e819c2b0d5a786393e54b6be92e}\label{class_lab1_1_1_geometry_1_1_polygon_a4b0a3e819c2b0d5a786393e54b6be92e}} 
+{\bfseries Polygon} (float\mbox{[}$\,$\mbox{]} points)
+\begin{DoxyCompactList}\small\item\em constructor \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_lab1_1_1_geometry_1_1_polygon_a2ca3b59192877894a907775b7457cad7}\label{class_lab1_1_1_geometry_1_1_polygon_a2ca3b59192877894a907775b7457cad7}} 
+PointF\mbox{[}$\,$\mbox{]} {\bfseries Get\+Points} ()
+\item 
+\mbox{\Hypertarget{class_lab1_1_1_geometry_1_1_polygon_a276046a45718478c6f602ef7f3f1b7ba}\label{class_lab1_1_1_geometry_1_1_polygon_a276046a45718478c6f602ef7f3f1b7ba}} 
+\mbox{\hyperlink{class_lab1_1_1_geometry_1_1_triangle}{Triangle}}\mbox{[}$\,$\mbox{]} {\bfseries Get\+Triangles} ()
+\item 
+\mbox{\Hypertarget{class_lab1_1_1_geometry_1_1_polygon_a4afb703e9e9a8ea7d8694a400e8f4c18}\label{class_lab1_1_1_geometry_1_1_polygon_a4afb703e9e9a8ea7d8694a400e8f4c18}} 
+double {\bfseries Get\+Area} ()
+\begin{DoxyCompactList}\small\item\em find area \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_lab1_1_1_geometry_1_1_polygon_a1c9ee002e055f1deb38ded1cae3ef55d}\label{class_lab1_1_1_geometry_1_1_polygon_a1c9ee002e055f1deb38ded1cae3ef55d}} 
+void {\bfseries Triangulate} ()
+\begin{DoxyCompactList}\small\item\em implementation of triangulation algorithm \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_lab1_1_1_geometry_1_1_polygon_a1a7fff7d161271b59049db425773916a}\label{class_lab1_1_1_geometry_1_1_polygon_a1a7fff7d161271b59049db425773916a}} 
+int {\bfseries Find\+Next\+Not\+Taken} (int start\+Pos)
+\begin{DoxyCompactList}\small\item\em take angle that wasn\textquotesingle{}t processed \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_lab1_1_1_geometry_1_1_polygon_a12f9cbd885507b28316e0af253e43b59}\label{class_lab1_1_1_geometry_1_1_polygon_a12f9cbd885507b28316e0af253e43b59}} 
+bool {\bfseries Is\+Left} (PointF a, PointF b, PointF c)
+\begin{DoxyCompactList}\small\item\em check for left point \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_lab1_1_1_geometry_1_1_polygon_ad03e2077e19cf3fe3070035445f4759b}\label{class_lab1_1_1_geometry_1_1_polygon_ad03e2077e19cf3fe3070035445f4759b}} 
+bool {\bfseries Is\+Point\+Inside} (PointF a, PointF b, PointF c, PointF p)
+\begin{DoxyCompactList}\small\item\em check for point inside \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_lab1_1_1_geometry_1_1_polygon_a7178cf59167eefd5d53480e9661abf99}\label{class_lab1_1_1_geometry_1_1_polygon_a7178cf59167eefd5d53480e9661abf99}} 
+bool {\bfseries Can\+Build\+Triangle} (int ai, int bi, int ci)
+\begin{DoxyCompactList}\small\item\em check if we can build trinagle(part of triangulation) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_lab1_1_1_geometry_1_1_polygon_a86ab9a96566677b9b29b2bdd9d681a60}\label{class_lab1_1_1_geometry_1_1_polygon_a86ab9a96566677b9b29b2bdd9d681a60}} 
+PointF\mbox{[}$\,$\mbox{]} {\bfseries points}
+\item 
+\mbox{\Hypertarget{class_lab1_1_1_geometry_1_1_polygon_ab990f51400b49682e8a7fab829dbac17}\label{class_lab1_1_1_geometry_1_1_polygon_ab990f51400b49682e8a7fab829dbac17}} 
+\mbox{\hyperlink{class_lab1_1_1_geometry_1_1_triangle}{Triangle}}\mbox{[}$\,$\mbox{]} {\bfseries triangles}
+\item 
+\mbox{\Hypertarget{class_lab1_1_1_geometry_1_1_polygon_a2892dc7ddf8097e72ddacb58b2356d49}\label{class_lab1_1_1_geometry_1_1_polygon_a2892dc7ddf8097e72ddacb58b2356d49}} 
+bool\mbox{[}$\,$\mbox{]} {\bfseries taken}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+class for polygon 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Polygon.\+cs\end{DoxyCompactItemize}
